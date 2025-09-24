@@ -4,11 +4,14 @@ import requests
 from fastapi import FastAPI, Query
 from requests import Response
 
+
 # Create FastAPI instance
 app = FastAPI()
 
+BASE_URL_OPEN_METEO = "https://api.open-meteo.com"
+
 # Open-Meteo API endpoint for weather forecast
-url_forecast = "https://api.open-meteo.com/v1/forecast"
+url_forecast = f"{BASE_URL_OPEN_METEO}/v1/forecast"
 
 @app.get("/temperature")
 def get_temperature_by_dates(lat: float, lon: float, date_i: str, date_f: str) -> Response:
