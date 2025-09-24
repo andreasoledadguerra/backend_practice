@@ -8,6 +8,7 @@ from requests import Response
 # Create FastAPI instance
 app = FastAPI()
 
+# Base URL for Open-Meteo API
 BASE_URL_OPEN_METEO = "https://api.open-meteo.com"
 
 # Open-Meteo API endpoint for weather forecast
