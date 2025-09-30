@@ -1,8 +1,7 @@
 import uvicorn
 import requests
 
-from fastapi import FastAPI, Query
-#from requests import Response
+from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import Dict, Any
 
@@ -32,14 +31,15 @@ def get_temperature_by_dates(lat: float, lon: float, date_i: str, date_f: str) -
         "end_date": date_f,
         "timezone": "UTC"
     }
+
+    # Hace una petición a Open-Meteo
     response = requests.get(url_forecast, params=params)
     
     return WeatherResponse(
-        data=response.json(),           # Extraigo los datos JSON
-        status_code=response.status_code,  # Copio el status code
-        success=response.status_code == 200  # Marco si fue exitosa
+        data=response.json(),           # Extrae los datos JSON
+        status_code=response.status_code,  # Copia el status code
+        success=response.status_code == 200  # Marca si fue exitosa
     )
-
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000)
