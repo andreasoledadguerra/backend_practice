@@ -2,7 +2,9 @@ import uvicorn
 import requests
 
 from fastapi import FastAPI, Query
-from requests import Response
+#from requests import Response
+from pydantic import BaseModel
+from typing import Dict, Any
 
 
 # Create FastAPI instance
@@ -14,8 +16,14 @@ BASE_URL_OPEN_METEO = "https://api.open-meteo.com"
 # Open-Meteo API endpoint for weather forecast
 url_forecast = f"{BASE_URL_OPEN_METEO}/v1/forecast"
 
+# Modelo de respuesta para FastAPI
+class WeatherResponse(BaseModel):
+    data: Dict[str, Any]
+    status_code: int
+    success: bool
+
 @app.get("/temperature")
-def get_temperature_by_dates(lat: float, lon: float, date_i: str, date_f: str) -> Response:
+def get_temperature_by_dates(lat: float, lon: float, date_i: str, date_f: str) -> WeatherResponse:
     params = {
         "latitude": lat,
         "longitude": lon,
@@ -24,26 +32,14 @@ def get_temperature_by_dates(lat: float, lon: float, date_i: str, date_f: str) -
         "end_date": date_f,
         "timezone": "UTC"
     }
-    response: Response = requests.get(url_forecast, params=params)
-    return response
+    response = requests.get(url_forecast, params=params)
+    
+    return WeatherResponse(
+        data=response.json(),           # Extraigo los datos JSON
+        status_code=response.status_code,  # Copio el status code
+        success=response.status_code == 200  # Marco si fue exitosa
+    )
 
-# @app.get("/ping")
-# def ping():
-#     result = {"Eve": "Vieja"}
-#     return result
-
-# @app.get("/dummy_endpoint")
-# def dummy_endpoint(param_1: str = Query(...), param_2: int = Query(...)):
-#    print(f"param_1={param_1} - param_2={param_2}")
-#    return {"content": "dummy"}
-#
-# def my_complex_function(a: int, b: int):
-#    return a + b
-#
-# @app.get("/some_new_endpoint")
-# def some_new_endpoint(a: int, b: int):
-#    result = my_complex_function(a, b)
-#    return {"content": result}
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000)
