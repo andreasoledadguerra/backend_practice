@@ -16,3 +16,17 @@ def get_temperature_by_dates(lat: float, lon: float, date_i: str, date_f: str) -
     }
     response: Response = requests.get(url_forecast, params=params)
     return response
+
+# Función para obtener la temperatura de una ciudad específica
+def get_weather_by_city(city: str, lat: float, lon: float) -> Response:
+    # en este ejemplo asumimos que el cliente puede pasar lat/lon directo
+    # o pasar solo city y resolver lat/lon aquí — el decorador usará lat/lon si están presentes.
+    params = {
+        "city": city,
+        "latitude": lat,
+        "longitude": lon,
+        "current_weather": "true",
+        "timezone": "UTC"
+    }
+    response: Response = requests.get(url_forecast, params=params)
+    return response
