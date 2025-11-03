@@ -15,13 +15,13 @@ BASE_URL_OPEN_METEO = "https://api.open-meteo.com"
 # Open-Meteo API endpoint for weather forecast
 url_forecast = f"{BASE_URL_OPEN_METEO}/v1/forecast"
 
-# Modelo de respuesta para FastAPI
+# Modelo de respuesta (validación) para FastAPI
 class WeatherResponse(BaseModel):
     data: Dict[str, Any]
     status_code: int
     success: bool
 
-# Decorador para definir un endpoint GET
+# Decorador para definir un endpoint GET en FastAPI para obtener temperatura por fechas
 @app.get("/temperature")
 def get_temperature_by_dates(lat: float, lon: float, date_i: str, date_f: str) -> WeatherResponse:
     params = {
@@ -41,6 +41,9 @@ def get_temperature_by_dates(lat: float, lon: float, date_i: str, date_f: str) -
         status_code=response.status_code,  # Copia el status code
         success=response.status_code == 200  # Marca si fue exitosa
     )
+
+
+
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000)
