@@ -42,7 +42,30 @@ def get_temperature_by_dates(lat: float, lon: float, date_i: str, date_f: str) -
         success=response.status_code == 200  # Marca si fue exitosa
     )
 
+@app.get("/temperature/{city}")
+def get_weather_by_city(city: str, lat: float, lon: float) -> WeatherResponse:
+    # en este ejemplo asumimos que el cliente puede pasar lat/lon directo
+    # o pasar solo city y resolver lat/lon aquí — el decorador usará lat/lon si están presentes.
+    params = {
+        "city": city,
+        "latitude": lat,
+        "longitude": lon,
+        "current_weather": "true",
+        "timezone": "UTC"
+    }
 
+    #Hace la petición a Open-Meteo
+    response = requests.get(url_forecast, params=params)
+
+    return WeatherResponse(
+        data=response.json(),           # Extrae los datos JSON
+        status_code=response.status_code,  # Copia el status code
+        success=response.status_code == 200  # Marca si fue exitosa
+    )
+
+
+#def weather_history(lat: float, lon: float, date_i: str, date_f: str):
+    #return {"info": "history via decorator"}
 
 
 if __name__ == "__main__":
