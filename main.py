@@ -86,7 +86,18 @@ def get_temperature_history(lat: float, lon: float, start_date: str, end_date: s
     )
 
 @app.get("/temperature/{stats}")
-
+def get_temperature_stats(lat: float, lon: float, start_date: str, end_date: str) -> Response:
+    params = {
+        "latitude": lat,
+        "longitude": lon,
+        "start_date": start_date,
+        "end_date": end_date,
+        "temperature_statistics": True,
+        "timezone": "UTC"
+    }
+    response = requests.get(url_forecast, params=params)
+    
+    return response
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000)
