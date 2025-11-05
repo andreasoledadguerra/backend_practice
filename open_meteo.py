@@ -34,14 +34,14 @@ def get_weather_by_city(city: str, lat: float, lon: float) -> Response:
 
 
 # Función para obtener el historial de temperatura en un rango de fechas
-def get_temperature_history(lat: float, lon: float, start_date: str, end_date: str) -> Response:
+def get_temperature_history(lat: float, lon: float, start_date: str, end_date: str, timezone:str = "UTC") -> Response:
     params = {
         "latitude": lat,
         "longitude": lon,
         "start_date": start_date,
         "end_date": end_date,
         "current_weather": True,
-        "timezone": "UTC"
+        "timezone":timezone 
     }
     response: Response = requests.get(url_forecast, params=params)
     return response
