@@ -43,3 +43,18 @@ if __name__ == "__main__":
     response = requests.get("http://localhost:8000/temperature/{history}", params=params)
     print(response.status_code)
     print(response.json()) 
+
+
+    params = {    
+        "lat": 40.7128,
+        "lon": -74.0060,
+        "start_date": "2025-08-01",
+        "end_date": "2025-08-07",
+        "temperature_statistics": True,
+        "timezone": "UTC"
+
+    }
+
+    response = requests.get("http://localhost:8000/temperature/{stats}", params=params)
+    print(response.status_code)
+    print(response.json()) 
