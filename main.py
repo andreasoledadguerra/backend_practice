@@ -64,7 +64,7 @@ def get_weather_by_city(city: str, lat: float, lon: float) -> WeatherResponse:
     )
 
 @app.get("temperature/{history}")
-def get_temperature_history(lat: float, lon: float, start_date: str, end_date: str) -> Response:
+def get_temperature_history(lat: float, lon: float, start_date: str, end_date: str) -> WeatherResponse:
     params = {
         "latitude": lat,
         "longitude": lon,
