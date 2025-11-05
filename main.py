@@ -21,6 +21,10 @@ class WeatherResponse(BaseModel):
     status_code: int
     success: bool
 
+class WeatherCitytResponse(BaseModel):
+
+    
+
 # Decorador para definir un endpoint GET en FastAPI para obtener temperatura por fechas
 @app.get("/temperature")
 def get_temperature_by_dates(lat: float, lon: float, date_i: str, date_f: str) -> WeatherResponse:
@@ -50,7 +54,7 @@ def get_weather_by_city(city: str, lat: float, lon: float) -> WeatherResponse:
         "city": city,
         "latitude": lat,
         "longitude": lon,
-        "current_weather": "true",
+        "current_weather": True,
         "timezone": "UTC"
     }
 
