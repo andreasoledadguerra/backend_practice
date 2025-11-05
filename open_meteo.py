@@ -18,7 +18,7 @@ def get_temperature_by_dates(lat: float, lon: float, date_i: str, date_f: str) -
     return response
 
 
-# Función para obtener la temperatura de una ciudad específica
+# Función para obtener la temperatura inmediata de una ciudad específica
 def get_weather_by_city(city: str, lat: float, lon: float) -> Response:
     # en este ejemplo asumimos que el cliente puede pasar lat/lon directo
     # o pasar solo city y resolver lat/lon aquí — el decorador usará lat/lon si están presentes.
@@ -26,7 +26,7 @@ def get_weather_by_city(city: str, lat: float, lon: float) -> Response:
         "city": city,
         "latitude": lat,
         "longitude": lon,
-        "current_weather": "true",
+        "current_weather": True,
         "timezone": "UTC"
     }
     response: Response = requests.get(url_forecast, params=params)
@@ -46,3 +46,15 @@ def get_temperature_history(lat: float, lon: float, start_date: str, end_date: s
     response: Response = requests.get(url_forecast, params=params)
     return response
 
+# Función para obtener estadísticas de temperatura
+def get_temperature_stats(lat: float, lon: float, start_date: str, end_date: str) -> Response:
+    params = {
+        "latitude": lat,
+        "longitude": lon,
+        "start_date": start_date,
+        "end_date": end_date,
+        "temperature_statistics": True,
+        "timezone": "UTC"
+    }
+    response: Response = requests.get(url_forecast, params=params)
+    return response
