@@ -82,7 +82,7 @@ def get_weather_by_city(city: str, lat: float, lon: float) -> WeatherResponse:
     )
 
 @app.get("temperature/{history}")
-def get_temperature_history(lat: float, lon: float, start_date: str, end_date: str) -> WeatherResponse:
+def get_temperature_history(lat: float, lon: float, start_date: str, end_date: str) -> WeatherHistoryResponse:
     params = {
         "latitude": lat,
         "longitude": lon,
@@ -93,7 +93,10 @@ def get_temperature_history(lat: float, lon: float, start_date: str, end_date: s
     }
     response = requests.get(url_forecast, params=params
                            )
-    return WeatherResponse(
+    return WeatherHistoryResponse( 
+        latitude=lat,
+        longitude=lon,
+        timezone="UTC",
         data=response.json(),           # Extrae los datos JSON
         status_code=response.status_code,  # Copia el status code
         success=response.status_code == 200  # Marca si fue exitosa
