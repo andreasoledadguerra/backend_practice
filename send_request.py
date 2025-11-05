@@ -6,6 +6,8 @@ import requests
 
 
 if __name__ == "__main__":
+
+    # Ejemplo de llamada al endpoint FastAPI para obtener temperatura por fechas
     params = {
         "lat": 40.7128,
         "lon": -74.0060,
@@ -16,7 +18,7 @@ if __name__ == "__main__":
     print(response.status_code)
     print(response.json())
 
-
+    # Ejemplo de llamada al endpoint FastAPI para obtener el clima por ciudad
     params = {
         "city": "New York",
         "lat": 40.7128,
@@ -30,7 +32,7 @@ if __name__ == "__main__":
     print(response.json())
 
 
-
+    # Ejemplo de llamada al endpoint FastAPI para obtener el historial de temperatura
     params = {
         "lat": 40.7128,
         "lon": -74.0060,
@@ -44,7 +46,7 @@ if __name__ == "__main__":
     print(response.status_code)
     print(response.json()) 
 
-
+    # Ejemplo de llamada al endpoint FastAPI para obtener estadísticas de temperatura
     params = {    
         "lat": 40.7128,
         "lon": -74.0060,
