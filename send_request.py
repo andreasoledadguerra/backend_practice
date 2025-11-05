@@ -21,7 +21,7 @@ if __name__ == "__main__":
         "city": "New York",
         "lat": 40.7128,
         "lon": -74.0060,
-        "current_weather": "true",
+        "current_weather": True,
         "timezone": "UTC"
     }
         
