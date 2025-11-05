@@ -75,10 +75,11 @@ def get_temperature_history(lat: float, lon: float, start_date: str, end_date: s
     }
     response = requests.get(url_forecast, params=params
                            )
-    return response
-#def weather_history(lat: float, lon: float, date_i: str, date_f: str):
-    #return {"info": "history via decorator"}
-
+    return WeatherResponse(
+        data=response.json(),           # Extrae los datos JSON
+        status_code=response.status_code,  # Copia el status code
+        success=response.status_code == 200  # Marca si fue exitosa
+    )
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000)
