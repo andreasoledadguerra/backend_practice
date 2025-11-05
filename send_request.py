@@ -35,7 +35,7 @@ if __name__ == "__main__":
         "lat": 40.7128,
         "lon": -74.0060,
         "start_date": "2025-08-01",
-        "end_date": "2025-08-07"
+        "end_date": "2025-08-07",
         "current_weather": True,
         "timezone": "UTC"
     }
