@@ -63,7 +63,7 @@ def get_weather_by_city(city: str, lat: float, lon: float) -> WeatherResponse:
         success=response.status_code == 200  # Marca si fue exitosa
     )
 
-
+@app.get("temperature/{history}")
 #def weather_history(lat: float, lon: float, date_i: str, date_f: str):
     #return {"info": "history via decorator"}
 
