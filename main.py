@@ -29,15 +29,15 @@ class WeatherHistoryResponse(BaseModel):
     status_code: int
     success: bool
 
-#class WeatherStatsResponse(BaseModel):
-#    latitude: float
-#    longitude: float
-#    timezone: str
-#    mean_temperature: Optional[float] = None
-#    min_temperature: Optional[float] = None
-#    max_temperature: Optional[float] = None
-#    status_code: int
-#    success: bool
+class WeatherStatsResponse(BaseModel):
+    latitude: float
+    longitude: float
+    timezone: str
+    mean_temperature: Optional[float] = None
+    min_temperature: Optional[float] = None
+    max_temperature: Optional[float] = None
+    status_code: int
+    success: bool
 
 # Decorador para definir un endpoint GET en FastAPI para obtener temperatura por fechas
 @app.get("/temperature")
