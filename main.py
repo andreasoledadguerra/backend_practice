@@ -102,23 +102,31 @@ def get_temperature_history(lat: float, lon: float, start_date: str, end_date: s
         success=response.status_code == 200  # Marca si fue exitosa
     )
 
-@app.get("/temperature/{stats}")
-def get_temperature_stats(lat: float, lon: float, start_date: str, end_date: str) -> WeatherResponse:
+@app.get("/temperature/{stats}")   
+def get_temperature_stats(lat: float, lon: float, start_date: str, end_date: str, timezone: str="UTC") -> WeatherStatsResponse:
     params = {
-        "latitude": lat,
-        "longitude": lon,
-        "start_date": start_date,
-        "end_date": end_date,
-        "temperature_statistics": True,
-        "timezone": "UTC"
+            "latitude": lat,
+            "longitude": lon,
+            "start_date": start_date,
+            "end_date": end_date,
+            "mean_temperature": True,
+            "min_temperature": True,
+            "max_temperature": True,
+            "timezone": timezone    
     }
-    response = requests.get(url_forecast, params=params)
-
-    return WeatherResponse(
-        data=response.json(),           # Extrae los datos JSON
-        status_code=response.status_code,  # Copia el status code
-        success=response.status_code == 200  # Marca si fue exitosa
+    response = requests.get(url_forecast, params=params
+                            )
+    return WeatherStatsResponse(
+        latitude=lat,
+        longitude=lon,
+        timezone="UTC",
+        mean_temperature=response.json().get("mean_temperature"),
+        min_temperature=response.json().get("min_temperature"),
+        max_temperature=response.json().get("max_temperature"),
+        status_code=response.status_code,
+        success=response.status_code == 200
     )
+
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000)
