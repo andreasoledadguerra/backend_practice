@@ -25,11 +25,11 @@ if __name__ == "__main__":
         "lon": -74.0060,
         "current_weather": True,
         "timezone": "UTC"
-    }
-        
+    }  
     response = requests.get("http://localhost:8000/temperature/{city}", params=params)
     print(response.status_code)
     print(response.json())
+
 
 
     # Ejemplo de llamada al endpoint FastAPI para obtener el historial de temperatura
@@ -41,22 +41,21 @@ if __name__ == "__main__":
         "current_weather": True,
         "timezone": "UTC"
     }
-
     response = requests.get("http://localhost:8000/temperature/{history}", params=params)
     print(response.status_code)
     print(response.json()) 
+
+
 
     # Ejemplo de llamada al endpoint FastAPI para obtener estadísticas de temperatura
     params = {    
         "lat": 40.7128,
         "lon": -74.0060,
-        "start_date": "2025-08-01",
-        "end_date": "2025-08-07",
-        "temperature_statistics": True,
-        "timezone": "UTC"
-
+        "timezone": "UTC",
+        "mean_temperature": True,
+        "min_temperature": True,
+        "max_temperature": True
     }
-
     response = requests.get("http://localhost:8000/temperature/{stats}", params=params)
     print(response.status_code)
     print(response.json()) 
