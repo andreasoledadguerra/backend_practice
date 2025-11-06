@@ -2,8 +2,8 @@ import uvicorn
 import requests
 
 from fastapi import FastAPI
-from pydantic import BaseModel, Optional
-from typing import Dict, Any
+from pydantic import BaseModel, 
+from typing import Dict, Any, Optional
 
 
 # Create FastAPI instance
