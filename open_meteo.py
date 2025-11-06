@@ -47,14 +47,16 @@ def get_temperature_history(lat: float, lon: float, start_date: str, end_date: s
     return response
 
 # Función para obtener estadísticas de temperatura
-def get_temperature_stats(lat: float, lon: float, start_date: str, end_date: str) -> Response:
+def get_temperature_stats(lat: float, lon: float, start_date: str, end_date: str, timezone: str="UTC") -> Response:
     params = {
         "latitude": lat,
         "longitude": lon,
         "start_date": start_date,
         "end_date": end_date,
-        "temperature_statistics": True,
-        "timezone": "UTC"
+        "mean_temperature": True,
+        "min_temperature": True,
+        "max_temperature": True,
+        "timezone": timezone
     }
     response: Response = requests.get(url_forecast, params=params)
     return response
