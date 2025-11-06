@@ -51,6 +51,8 @@ if __name__ == "__main__":
     params = {    
         "lat": 40.7128,
         "lon": -74.0060,
+        "start_date": "2025-08-01",
+        "end_date": "2025-08-07",
         "timezone": "UTC",
         "mean_temperature": True,
         "min_temperature": True,
