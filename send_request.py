@@ -53,10 +53,10 @@ if __name__ == "__main__":
         "lon": -74.0060,
         "start_date": "2025-08-01",
         "end_date": "2025-08-07",
-        "timezone": "UTC",
         "mean_temperature": True,
         "min_temperature": True,
-        "max_temperature": True
+        "max_temperature": True,
+        "timezone": "UTC"
     }
     response = requests.get("http://localhost:8000/temperature/{stats}", params=params)
     print(response.status_code)
