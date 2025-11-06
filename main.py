@@ -2,7 +2,7 @@ import uvicorn
 import requests
 
 from fastapi import FastAPI
-from pydantic import BaseModel
+from pydantic import BaseModel, Optional
 from typing import Dict, Any
 
 
@@ -122,3 +122,5 @@ def get_temperature_stats(lat: float, lon: float, start_date: str, end_date: str
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000)
+
+    
