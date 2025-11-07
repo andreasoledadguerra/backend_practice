@@ -61,7 +61,7 @@ def get_temperature_by_dates(lat: float, lon: float, date_i: str, date_f: str) -
         success=response.status_code == 200  # Marca si fue exitosa
     )
 
-@app.get("/temperature/{city}")
+@app.get("/temperature/city")
 def get_weather_by_city(city: str, lat: float, lon: float) -> WeatherResponse:
     # en este ejemplo asumimos que el cliente puede pasar lat/lon directo
     # o pasar solo city y resolver lat/lon aquí — el decorador usará lat/lon si están presentes.
@@ -82,7 +82,7 @@ def get_weather_by_city(city: str, lat: float, lon: float) -> WeatherResponse:
         success=response.status_code == 200  # Marca si fue exitosa
     )
 
-@app.get("temperature/{history}")
+@app.get("/temperature/history")
 def get_temperature_history(lat: float, lon: float, start_date: str, end_date: str, timezone: str = "UTC") -> WeatherHistoryResponse:
     params = {
         "latitude": lat,
@@ -103,7 +103,7 @@ def get_temperature_history(lat: float, lon: float, start_date: str, end_date: s
         success=response.status_code == 200  # Marca si fue exitosa
     )
 
-@app.get("/temperature/{stats}")   
+@app.get("/temperature/stats")   
 def get_temperature_stats(lat: float, lon: float, start_date: str, end_date: str, timezone: str="UTC") -> WeatherStatsResponse:
     params = {
             "latitude": lat,
@@ -131,5 +131,3 @@ def get_temperature_stats(lat: float, lon: float, start_date: str, end_date: str
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000)
-
-    
