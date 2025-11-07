@@ -26,7 +26,7 @@ if __name__ == "__main__":
         "current_weather": True,
         "timezone": "UTC"
     }  
-    response = requests.get("http://localhost:8000/temperature/{city}", params=params)
+    response = requests.get("http://localhost:8000/temperature/city", params=params)
     print(response.status_code)
     print(response.json())
 
@@ -41,7 +41,7 @@ if __name__ == "__main__":
         "current_weather": True,
         "timezone": "UTC"
     }
-    response = requests.get("http://localhost:8000/temperature/{history}", params=params)
+    response = requests.get("http://localhost:8000/temperature/history", params=params)
     print(response.status_code)
     print(response.json()) 
 
@@ -56,8 +56,13 @@ if __name__ == "__main__":
         "mean_temperature": True,
         "min_temperature": True,
         "max_temperature": True,
-        "timezone": "UTC"
+        "timezone":"UTC"
     }
-    response = requests.get("http://localhost:8000/temperature/{stats}", params=params)
+    response = requests.get("http://localhost:8000/temperature/stats", params=params)
     print(response.status_code)
     print(response.json()) 
+
+
+
+
+
