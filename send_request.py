@@ -36,8 +36,8 @@ if __name__ == "__main__":
     params = {
         "lat": 40.7128,
         "lon": -74.0060,
-        "start_date": "2025-08-01",
-        "end_date": "2025-08-07",
+        "start_date": "2025-08-09",
+        "end_date": "2025-08-15",
         "current_weather": True,
         "timezone": "UTC"
     }
