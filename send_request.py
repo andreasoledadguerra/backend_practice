@@ -4,6 +4,7 @@ Este script haría la lógica de enviar una solicitud HTTP a un endpoint FastAPI
 
 import requests
 
+headers = {"Authorization": "mi_token_super_secreto_1711"}
 
 if __name__ == "__main__":
 
@@ -14,7 +15,7 @@ if __name__ == "__main__":
         "date_i": "2025-08-09",
         "date_f": "2025-08-15"
     }
-    response = requests.get("http://localhost:8000/temperature", params=params)
+    response = requests.get("http://localhost:8000/temperature", params=params, headers=headers)
     print(response.status_code)
     print(response.json())
 
@@ -26,7 +27,7 @@ if __name__ == "__main__":
         "current_weather": True,
         "timezone": "UTC"
     }  
-    response = requests.get("http://localhost:8000/temperature/city", params=params)
+    response = requests.get("http://localhost:8000/temperature/city", params=params,headers=headers)
     print(response.status_code)
     print(response.json())
 
@@ -41,7 +42,7 @@ if __name__ == "__main__":
         "current_weather": True,
         "timezone": "UTC"
     }
-    response = requests.get("http://localhost:8000/temperature/history", params=params)
+    response = requests.get("http://localhost:8000/temperature/history", params=params, headers=headers)
     print(response.status_code)
     print(response.json()) 
 
@@ -58,7 +59,7 @@ if __name__ == "__main__":
         "max_temperature": True,
         "timezone":"UTC"
     }
-    response = requests.get("http://localhost:8000/temperature/stats", params=params)
+    response = requests.get("http://localhost:8000/temperature/stats", params=params, headers=headers)
     print(response.status_code)
     print(response.json())
 
