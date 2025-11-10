@@ -51,8 +51,8 @@ if __name__ == "__main__":
     params = {    
         "lat": 40.7128,
         "lon": -74.0060,
-        "start_date": "2025-08-01",
-        "end_date": "2025-08-07",
+        "start_date": "2025-08-09",
+        "end_date": "2025-08-15",
         "mean_temperature": True,
         "min_temperature": True,
         "max_temperature": True,
@@ -60,7 +60,7 @@ if __name__ == "__main__":
     }
     response = requests.get("http://localhost:8000/temperature/stats", params=params)
     print(response.status_code)
-    print(response.json()) 
+    print(response.json())
 
 
 
