@@ -10,8 +10,11 @@ from pydantic import BaseModel
 from typing import Dict, Any, Optional
 from dotenv import load_dotenv
 
-
+# Load environment variables from .env file
 load_dotenv()
+
+# Retrieve API token from environment variables
+API_TOKEN = os.getenv("API_SECRET_TOKEN")
 
 # Create FastAPI instance
 app = FastAPI()
