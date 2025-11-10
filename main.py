@@ -1,7 +1,7 @@
 import uvicorn
 import requests
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Header
 
 from pydantic import BaseModel 
 from typing import Dict, Any, Optional
@@ -127,6 +127,27 @@ def get_temperature_stats(lat: float, lon: float, start_date: str, end_date: str
         status_code=response.status_code,
         success=response.status_code == 200
     )
+
+#-------------------------------------------------------------------------
+@app.get("/temperature/stats", response_model=WeatherStatsResponse)
+def get_temperature_stats(lat: float, lon: float, start_date: str, end_date: str, timezone: str = "UTC"):
+    print("Handler: get_temperature_stats", lat, lon, start_date, end_date)
+    # Aquí calcularías mean/min/max localmente o pedirías un endpoint que te lo devuelva
+    params = {"latitude": lat, "longitude": lon, "start_date": start_date, "end_date": end_date, "timezone": timezone}
+    response = requests.get(url_forecast, params=params)
+    payload = response.json()
+    # ejemplo de extracción (ajusta según la estructura real)
+    temps = payload.get("hourly", {}).get("temperature_2m", [])
+    mean = sum(temps) / len(temps) if temps else None
+    mn = min(temps) if temps else None
+    mx = max(temps) if temps else None
+    return {"latitude": lat, "longitude": lon, "timezone": timezone, "mean_temperature": mean, "min_temperature": mn, "max_temperature": mx, "status_code": response.status_code, "success": response.status_code == 200
+
+
+
+
+
+#----------------------------------------------------------------------------
 
 
 if __name__ == "__main__":
