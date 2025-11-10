@@ -5,7 +5,7 @@ from fastapi import FastAPI, Header
 
 from pydantic import BaseModel 
 from typing import Dict, Any, Optional
-
+from dotenv import load_dotenv
 
 # Create FastAPI instance
 app = FastAPI()
