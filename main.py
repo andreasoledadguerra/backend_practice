@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Retrieve API token from environment variables
-API_TOKEN = os.getenv("API_SECRET_TOKEN")
+#API_TOKEN = os.getenv("API_SECRET_TOKEN")
 
 # Create FastAPI instance
 app = FastAPI()
@@ -42,6 +42,7 @@ class WeatherHistoryResponse(BaseModel):
 class WeatherStatsResponse(BaseModel):
     latitude: float
     longitude: float
+
     timezone: str
     mean_temperature: Optional[float] = None
     min_temperature: Optional[float] = None
@@ -150,8 +151,7 @@ def get_temperature_stats(lat: float, lon: float, start_date: str, end_date: str
     mean = sum(temps) / len(temps) if temps else None
     mn = min(temps) if temps else None
     mx = max(temps) if temps else None
-    return {"latitude": lat, "longitude": lon, "timezone": timezone, "mean_temperature": mean, "min_temperature": mn, "max_temperature": mx, "status_code": response.status_code, "success": response.status_code == 200
-
+    return {"latitude": lat, "longitude": lon, "timezone": timezone, "mean_temperature": mean, "min_temperature": mn, "max_temperature": mx, "status_code": response.status_code, "success": response.status_code == 200}
 
 
 
